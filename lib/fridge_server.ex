@@ -3,8 +3,8 @@ defmodule FridgeServer do
 
   ### Public API
 
-  def start_link do
-    {:ok, fridge} = :gen_server.start_link FridgeServer, [], []
+  def start_link(items) do
+    {:ok, fridge} = :gen_server.start_link FridgeServer, items, []
     fridge
   end
 
@@ -17,10 +17,6 @@ defmodule FridgeServer do
   end
 
   ### GenServer API
-
-  def init(items) do
-    {:ok, items}
-  end
 
   def handle_call({:store, item}, _from, items) do
     {:reply, :ok, [item|items]}
