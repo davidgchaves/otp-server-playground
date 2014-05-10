@@ -11,4 +11,9 @@ defmodule FridgeServerTest do
     :gen_server.call fridge, {:store, :bacon}
     assert {:ok, :bacon} == :gen_server.call fridge, {:take, :bacon}
   end
+
+  test "taking something from the fridge that isn't in there" do
+    {:ok, fridge} = :gen_server.start_link FridgeServer, [], []
+    assert :not_found == :gen_server.call fridge, {:take, :bacon}
+  end
 end

@@ -10,6 +10,9 @@ defmodule FridgeServer do
   end
 
   def handle_call({:take, item}, _from, items) do
-    {:reply, {:ok, item}, items}
+    case Enum.member?(items, item) do
+      true  -> {:reply, {:ok, item}, List.delete(items, item)}
+      false -> {:reply, :not_found, items}
+    end
   end
 end
