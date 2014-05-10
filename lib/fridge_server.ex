@@ -1,6 +1,15 @@
 defmodule FridgeServer do
   use GenServer.Behaviour
 
+  ### Public API
+
+  def start_link do
+    {:ok, fridge} = :gen_server.start_link FridgeServer, [], []
+    fridge
+  end
+
+  ### GenServer API
+
   def init(items) do
     {:ok, items}
   end
