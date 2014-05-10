@@ -8,6 +8,10 @@ defmodule FridgeServer do
     fridge
   end
 
+  def store(fridge, item) do
+    :gen_server.call fridge, {:store, item}
+  end
+
   ### GenServer API
 
   def init(items) do

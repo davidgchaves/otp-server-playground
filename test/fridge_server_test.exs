@@ -3,12 +3,12 @@ defmodule FridgeServerTest do
 
   test "putting something into the fridge" do
     fridge = FridgeServer.start_link
-    assert :ok == :gen_server.call fridge, {:store, :bacon}
+    assert :ok == FridgeServer.store fridge, :bacon
   end
 
   test "removing something from the fridge" do
     fridge = FridgeServer.start_link
-    :gen_server.call fridge, {:store, :bacon}
+    FridgeServer.store fridge, :bacon
     assert {:ok, :bacon} == :gen_server.call fridge, {:take, :bacon}
   end
 
